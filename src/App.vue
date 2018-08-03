@@ -8,7 +8,7 @@
 
 <script>
   export default {
-    name: 'vx-view',
+    name: 'appvue',
     data() {
       return {
         transitionName: '',
@@ -17,17 +17,27 @@
     },
     watch: {
       '$route'(to, from) {
-        const toDepth = to.path.substr(1) ? to.path.substr(1).split('/').length : 0;
-        const fromDepth = from.path.substr(1) ? from.path.substr(1).split('/').length : 0;
-        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left';
-
+        if(this.isChild(from.path)) {
+          this.transitionName = this.isChild(to.path) ? 'slide-left' : 'slide-right';
+        } else {
+          this.transitionName = this.isChild(to.path) ? 'slide-left' : '';
+        }
+      }
+    },
+    methods: {
+      isChild(str) {
+        return (/\/.+/).test(str);
       }
     }
-  }
+  };
 </script>
 
 <style lang="less">
-  @import './less/index.less';
+  @import 'swiper/dist/css/swiper.min.css';
+  @import 'mint-ui/lib/style.css';
+  @import './style/tool.less';
+  @import './style/global.less';
+  @import './style/mint-ui.less';
   .slide-left-enter,
   .slide-right-leave-active {
     -webkit-transform: translate(100%, 0);
@@ -35,5 +45,14 @@
   .slide-left-leave-active,
   .slide-right-enter {
     -webkit-transform: translate(-100%, 0);
+  }
+  html,
+  body {
+    background-color: #f3f3f3;
+    font-family: '苹方', '微软雅黑', '宋体';
+  }
+
+  .container-wrapper {
+    height: 100%;
   }
 </style>
