@@ -5,8 +5,9 @@ const router = [
     component: () => import('@/pages/index')
   },
   {
-    path: '*',
-    redirect: '/index'
+    name: 'location',
+    path: '/location',
+    component: () => import('@/pages/index')
   },
   {
     path: '/',

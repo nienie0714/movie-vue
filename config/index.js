@@ -11,10 +11,10 @@ module.exports = {
     assetsPublicPath: '/',
     proxyTable: {
       '/proxy': {
-        target: '',
+        target: 'https://free-api.heweather.com/',
         changeOrigin: true,
         pathRewrite: {
-          '^/proxy': '/proxy'
+          '^/proxy': ''
         }
       }
     },

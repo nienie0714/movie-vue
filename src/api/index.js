@@ -80,20 +80,20 @@ axios.interceptors.response.use(
   }
 );
 
-//检查接口请求状态
-// function checkStatus(resolve, reject, response) {
-//   if (response && response.status === 200) {
-//     if (response.data.status === 10000000) {
-//       resolve(response.data.data);
-//     } else {
-//       // MintUI.Toast(response.message);
-//       reject(response.message);
-//     }
-//   } else {
-//     // MintUI.Toast(response.message);
-//     reject(response.message);
-//   }
-// }
+// 检查接口请求状态;
+function checkStatus(resolve, reject, response) {
+  if (response && response.status === 200) {
+    if (response.data.status === 10000000) {
+      resolve(response.data.data);
+    } else {
+      // MintUI.Toast(response.message);
+      reject(response.message);
+    }
+  } else {
+    // MintUI.Toast(response.message);
+    reject(response.message);
+  }
+}
 
 function checkCode(res) {
   if (res.status === 501) {
@@ -163,7 +163,7 @@ export default {
     } else {
       return axios({
         method: 'get',
-        baseURL: `https://free-api.heweather.com/s6/weather/`,
+        baseURL: '',
         url: url.url,
         params, // get 请求时带的参数
         timeout: 10000
